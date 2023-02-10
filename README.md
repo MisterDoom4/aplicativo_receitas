@@ -1,16 +1,25 @@
-# flutter_application_1
+# Aplicativo de Receitas com Flutter
 
-A new Flutter project.
+Este é um aplicativo de receitas simples, desenvolvido com o framework Flutter, que permite aos usuários encontrar e salvar receitas de acordo com suas preferências. Com uma interface intuitiva e fácil de usar, este aplicativo é perfeito para aqueles que adoram cozinhar e procuram novas receitas para experimentar.
 
-## Getting Started
+## Recursos
 
-This project is a starting point for a Flutter application.
+- Busca de receitas por categoria, ingrediente ou nome da receita
+- Exibição de informações detalhadas sobre a receita, incluindo ingredientes, modo de preparo e tempo de cozimento
+- Opção de salvar receitas favoritas para acesso rápido
+- Adição de notas pessoais às receitas salvas
 
-A few resources to get you started if this is your first Flutter project:
+## Instalação
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Instale o [Flutter](https://flutter.dev/docs/get-started/install) em seu computador
+2. Clone este repositório
+3. Abra o terminal e navegue até o diretório do projeto
+4. Execute o comando `flutter run` para rodar o aplicativo em um emulador ou dispositivo móvel
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Contribuições
+
+Este é um projeto de código aberto e todas as contribuições são bem-vindas. Se você gostaria de contribuir, por favor, abra uma issue ou envie uma pull request.
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT. Mais detalhes estão disponíveis no arquivo [LICENSE](LICENSE.md).
