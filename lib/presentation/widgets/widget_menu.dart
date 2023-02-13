@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import '../../util/constants.dart';
 
 class Menu extends StatelessWidget {
   const Menu({
@@ -37,11 +37,6 @@ class Menu extends StatelessWidget {
             leading: const Icon(Icons.login),
             title: const Text("Login"),
             onTap: () => Navigator.pushNamed(context, '/login'),
-          ),
-          ListTile(
-            leading: const Icon(Icons.app_registration),
-            title: const Text("Cadastrar"),
-            onTap: () => Navigator.pushNamed(context, '/register'),
           ),
           const ListTile(
             leading: Icon(Icons.settings),

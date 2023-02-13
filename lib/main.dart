@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:receitas/util/constants.dart';
 
-import 'routes/route_manager.dart';
+import 'util/routes/route_manager.dart';
 
 void main() {
   runApp(const AppEntry());
@@ -31,18 +32,7 @@ class _AppEntry extends State<AppEntry> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: const MaterialColor(0XFFFF8A65, {
-          50: Color.fromRGBO(255, 138, 101, .1),
-          100: Color.fromRGBO(255, 138, 101, .2),
-          200: Color.fromRGBO(255, 138, 101, .3),
-          300: Color.fromRGBO(255, 138, 101, .4),
-          400: Color.fromRGBO(255, 138, 101, .5),
-          500: Color.fromRGBO(255, 138, 101, .6),
-          600: Color.fromRGBO(255, 138, 101, .7),
-          700: Color.fromRGBO(255, 138, 101, .8),
-          800: Color.fromRGBO(255, 138, 101, .9),
-          900: Color.fromRGBO(255, 138, 101, 1),
-        }),
+        primarySwatch: appMaterialColor,
       ),
       initialRoute: '/',
       onGenerateRoute: GenerateAllRoutes.generateRoute,

@@ -19,8 +19,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.only(end: 310, top: 22),
+                child: BackButton(
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ),
               const Padding(
-                padding: EdgeInsetsDirectional.only(top: 150, bottom: 20),
+                padding: EdgeInsetsDirectional.only(top: 90, bottom: 20),
                 child: logo,
               ),
               Padding(

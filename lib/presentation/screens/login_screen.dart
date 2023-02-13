@@ -79,6 +79,21 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
+                      ),
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, '/register'),
+                        child: RichText(
+                          text: const TextSpan(
+                              text: 'Sou um novo usuario,',
+                              style: TextStyle(color: Colors.black),
+                              children: [
+                                TextSpan(
+                                    text: " cadatre aqui",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold))
+                              ]),
+                        ),
                       )
                     ],
                   ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:receitas/screens/home.dart';
-import 'package:receitas/screens/login_screen.dart';
-import 'package:receitas/screens/register_screen.dart';
+import 'package:receitas/presentation/screens/home.dart';
+import 'package:receitas/presentation/screens/login_screen.dart';
+import 'package:receitas/presentation/screens/register_screen.dart';
 
 class GenerateAllRoutes {
   static Route<dynamic> generateRoute(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import '../../util/constants.dart';
 
 class UserMenu extends StatelessWidget {
   const UserMenu({
