@@ -18,11 +18,13 @@ class _TopicsState extends State<Topics> {
         ),
         child: Column(
           children: [
-            Text(widget.titulo,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                )),
+            Text(
+              widget.titulo,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
             const Text('Imagens'),
           ],
         ));
