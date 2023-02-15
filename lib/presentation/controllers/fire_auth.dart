@@ -63,4 +63,24 @@ class FireAuth {
 
     return refreshedUser;
   }
+
+  //comfirmar email
+  static Future<void> sendEmailVerification() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+    }
+  }
+
+  //saber se o email foi confirmado
+  static Future<bool> isEmailVerified() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    await user!.reload();
+    return user.emailVerified;
+  }
+
+  static Future<void> signOut() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    await auth.signOut();
+  }
 }

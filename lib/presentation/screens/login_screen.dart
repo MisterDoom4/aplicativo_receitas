@@ -2,6 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:receitas/presentation/controllers/validator.dart';
 import 'package:receitas/util/constants.dart';
+import 'package:receitas/util/globals.dart' as globals;
+
+import '../controllers/fire_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -21,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _isProcessing = false;
 
-  // User? user = FirebaseAuth.instance.currentUser;
+  User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: TextFormField(
                             controller: _passwordController,
                             focusNode: _focusPassword,
+                            obscureText: true,
                             validator: (value) => Validator.validatePassword(
                               password: value,
                             ),
@@ -96,19 +100,58 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20, bottom: 20),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "ENTRAR",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
+                        _isProcessing
+                            ? const Padding(
+                                padding: EdgeInsets.all(20),
+                                child: CircularProgressIndicator(),
+                              )
+                            : Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 20),
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    setState(() {
+                                      _isProcessing = true;
+                                    });
+                                    if (_formKey.currentState!.validate()) {
+                                      user = await FireAuth
+                                          .signInUsingEmailPassword(
+                                              email: _emailController.text,
+                                              password:
+                                                  _passwordController.text,
+                                              context: context);
+                                      setState(() {
+                                        _isProcessing = false;
+                                      });
+                                      if (user != null) {
+                                        globals.userLogin = user;
+                                        if (await FireAuth.isEmailVerified()) {
+                                        } else {
+                                          //TODO: Implementar verificação de email
+                                        }
+                                        if (context.mounted) {
+                                          Navigator.pushNamed(context, '/');
+                                        }
+                                      } else {
+                                        if (context.mounted) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                            content: Text(
+                                                "Erro ao fazer login, tente novamente"),
+                                          ));
+                                        }
+                                      }
+                                    }
+                                  },
+                                  child: const Text(
+                                    "ENTRAR",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
                         TextButton(
                           onPressed: () =>
                               Navigator.pushNamed(context, '/register'),

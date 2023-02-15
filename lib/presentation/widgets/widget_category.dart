@@ -21,9 +21,7 @@ class _CategoryState extends State<Category> {
           child: Column(
             children: [
               TextButton(
-                onPressed: () {
-                  print('teste1');
-                },
+                onPressed: () {},
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(defaultColor),
                   overlayColor: MaterialStateProperty.all(Colors.red),
@@ -43,9 +41,7 @@ class _CategoryState extends State<Category> {
           child: Column(
             children: [
               TextButton(
-                onPressed: () {
-                  print('teste2');
-                },
+                onPressed: () {},
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(defaultColor),
                   overlayColor: MaterialStateProperty.all(Colors.red),
@@ -65,9 +61,7 @@ class _CategoryState extends State<Category> {
           child: Column(
             children: [
               TextButton(
-                onPressed: () {
-                  print('teste3');
-                },
+                onPressed: () {},
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(defaultColor),
                   overlayColor: MaterialStateProperty.all(Colors.red),
@@ -87,9 +81,7 @@ class _CategoryState extends State<Category> {
           child: Column(
             children: [
               TextButton(
-                onPressed: () {
-                  print('teste4');
-                },
+                onPressed: () {},
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(defaultColor),
                   overlayColor: MaterialStateProperty.all(Colors.red),
@@ -109,9 +101,7 @@ class _CategoryState extends State<Category> {
           child: Column(
             children: [
               TextButton(
-                onPressed: () {
-                  print('teste5');
-                },
+                onPressed: () {},
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(defaultColor),
                   overlayColor: MaterialStateProperty.all(Colors.red),
@@ -131,9 +121,7 @@ class _CategoryState extends State<Category> {
           child: Column(
             children: [
               TextButton(
-                onPressed: () {
-                  print('teste6');
-                },
+                onPressed: () {},
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(defaultColor),
                   overlayColor: MaterialStateProperty.all(Colors.red),
@@ -153,9 +141,7 @@ class _CategoryState extends State<Category> {
           child: Column(
             children: [
               TextButton(
-                onPressed: () {
-                  print('teste7');
-                },
+                onPressed: () {},
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(defaultColor),
                   overlayColor: MaterialStateProperty.all(Colors.red),

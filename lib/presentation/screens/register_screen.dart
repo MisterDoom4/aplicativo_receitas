@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:receitas/util/constants.dart';
-
+import 'package:receitas/util/globals.dart' as globals;
 import '../controllers/fire_auth.dart';
 import '../controllers/validator.dart';
 import 'home.dart';
@@ -203,6 +203,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               _isProcessing = false;
                                             });
                                             if (user != null) {
+                                              globals.userLogin = user;
+                                              FireAuth.sendEmailVerification();
                                               if (context.mounted) {
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(

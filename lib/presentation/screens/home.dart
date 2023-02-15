@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:receitas/presentation/widgets/widget_topics.dart';
 import 'package:receitas/util/constants.dart';
 import 'package:receitas/presentation/widgets/widget_search.dart';
+import 'package:receitas/util/globals.dart' as globals;
 
 import '../widgets/widget_category.dart';
 import '../widgets/widget_menu.dart';
@@ -15,6 +16,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Widget initMenu = const Menu();
+  @override
+  void initState() {
+    super.initState();
+    if (globals.userLogin == null) {
+      initMenu = const Menu();
+    } else {
+      initMenu = const UserMenu();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,12 +55,12 @@ class _HomeState extends State<Home> {
           Padding(
             padding: EdgeInsets.only(top: 10),
             child: Topics(
-              titulo: 'Mais Curtidas',
+              titulo: 'Receitas mais curtidas',
             ),
           ),
         ],
       ),
-      drawer: const UserMenu(),
+      drawer: initMenu,
     );
   }
 }
