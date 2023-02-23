@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:receitas/util/constants.dart';
-import 'package:receitas/util/globals.dart' as globals;
 import '../controllers/fire_auth.dart';
 import '../controllers/validator.dart';
 import 'home.dart';
@@ -186,48 +185,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           top: 20, bottom: 20),
                                       child: ElevatedButton(
                                         onPressed: () async {
-                                          setState(() {
-                                            _isProcessing = true;
-                                          });
-                                          if (_registerFormKey.currentState!
-                                              .validate()) {
-                                            User? user = await FireAuth
-                                                .registerUsingEmailPassword(
-                                                    name: _nameController.text,
-                                                    email:
-                                                        _emailController.text,
-                                                    password:
-                                                        _passwordController
-                                                            .text);
-                                            setState(() {
-                                              _isProcessing = false;
-                                            });
-                                            if (user != null) {
-                                              globals.userLogin = user;
-                                              FireAuth.sendEmailVerification();
-                                              if (context.mounted) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  const SnackBar(
-                                                    content: Text(
-                                                        "Cadastro realizado com sucesso!"),
-                                                  ),
-                                                );
-                                                Navigator.of(context)
-                                                    .pushAndRemoveUntil(
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const Home(),
-                                                  ),
-                                                  ModalRoute.withName('/'),
-                                                );
-                                              }
-                                            }
-                                          } else {
-                                            setState(() {
-                                              _isProcessing = false;
-                                            });
-                                          }
+                                          await _registerIn(context);
                                         },
                                         child: const Text(
                                           "CADASTRAR",
@@ -251,5 +209,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _registerIn(BuildContext context) async {
+    setState(() {
+      _isProcessing = true;
+    });
+    if (_registerFormKey.currentState!.validate()) {
+      User? user = await FireAuth.registerUsingEmailPassword(
+          name: _nameController.text,
+          email: _emailController.text,
+          password: _passwordController.text);
+      setState(() {
+        _isProcessing = false;
+      });
+      if (user != null) {
+        FireAuth.sendEmailVerification();
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Cadastro realizado com sucesso!"),
+            ),
+          );
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => const Home(),
+            ),
+            ModalRoute.withName('/'),
+          );
+        }
+      }
+    } else {
+      setState(() {
+        _isProcessing = false;
+      });
+    }
   }
 }

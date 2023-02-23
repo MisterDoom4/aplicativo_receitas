@@ -30,7 +30,7 @@ class _AppEntry extends State<AppEntry> {
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchAlbum();
+    // futureAlbum = fetchAlbum();
   }
 
   @override

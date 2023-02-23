@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:receitas/presentation/controllers/validator.dart';
 import 'package:receitas/util/constants.dart';
-import 'package:receitas/util/globals.dart' as globals;
 
 import '../controllers/fire_auth.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -23,8 +23,16 @@ class _LoginScreenState extends State<LoginScreen> {
   final _focusPassword = FocusNode();
 
   bool _isProcessing = false;
+  FirebaseDatabase database = FirebaseDatabase.instance;
 
-  User? user = FirebaseAuth.instance.currentUser;
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _focusEmail.dispose();
+    _focusPassword.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   child: Form(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     key: _formKey,
                     child: Column(
                       children: [
@@ -110,38 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     const EdgeInsets.only(top: 20, bottom: 20),
                                 child: ElevatedButton(
                                   onPressed: () async {
-                                    setState(() {
-                                      _isProcessing = true;
-                                    });
-                                    if (_formKey.currentState!.validate()) {
-                                      user = await FireAuth
-                                          .signInUsingEmailPassword(
-                                              email: _emailController.text,
-                                              password:
-                                                  _passwordController.text,
-                                              context: context);
-                                      setState(() {
-                                        _isProcessing = false;
-                                      });
-                                      if (user != null) {
-                                        globals.userLogin = user;
-                                        if (await FireAuth.isEmailVerified()) {
-                                        } else {
-                                          //TODO: Implementar verificação de email
-                                        }
-                                        if (context.mounted) {
-                                          Navigator.pushNamed(context, '/');
-                                        }
-                                      } else {
-                                        if (context.mounted) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                            content: Text(
-                                                "Erro ao fazer login, tente novamente"),
-                                          ));
-                                        }
-                                      }
-                                    }
+                                    await _handleSigIn(context);
                                   },
                                   child: const Text(
                                     "ENTRAR",
@@ -177,5 +155,41 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _handleSigIn(BuildContext context) async {
+    // DatabaseReference ref = database.ref("users/123");
+
+    // await ref.set({
+    //   "name": "John",
+    //   "age": 18,
+    //   "address": {"line1": "100 Mountain View"}
+    // });
+    setState(() {
+      _isProcessing = true;
+    });
+    if (_formKey.currentState!.validate()) {
+      User? user = await FireAuth.signInUsingEmailPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+          context: context);
+      setState(() {
+        _isProcessing = false;
+      });
+      if (user != null) {
+        if (await FireAuth.isEmailVerified() == false) {
+          //TODO: Implementar verificação de email
+        }
+        if (context.mounted) {
+          Navigator.pushNamed(context, '/');
+        }
+      } else {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Erro ao fazer login, tente novamente"),
+          ));
+        }
+      }
+    }
   }
 }

@@ -1,30 +1,26 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:receitas/presentation/widgets/widget_topics.dart';
-import 'package:receitas/util/constants.dart';
+import 'package:receitas/presentation/widgets/widget_category.dart';
+import 'package:receitas/presentation/widgets/widget_menu.dart';
 import 'package:receitas/presentation/widgets/widget_search.dart';
-import 'package:receitas/util/globals.dart' as globals;
-
-import '../widgets/widget_category.dart';
-import '../widgets/widget_menu.dart';
-import '../widgets/widget_usermenu.dart';
+import 'package:receitas/presentation/widgets/widget_topics.dart';
+import 'package:receitas/presentation/widgets/widget_usermenu.dart';
+import 'package:receitas/util/constants.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  Widget initMenu = const Menu();
+  late Widget initMenu;
   @override
   void initState() {
     super.initState();
-    if (globals.userLogin == null) {
-      initMenu = const Menu();
-    } else {
-      initMenu = const UserMenu();
-    }
+    User? user = FirebaseAuth.instance.currentUser;
+    initMenu = user == null ? const Menu() : const UserMenu();
   }
 
   @override
